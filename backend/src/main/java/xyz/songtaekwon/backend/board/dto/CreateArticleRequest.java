@@ -1,23 +1,12 @@
 package xyz.songtaekwon.backend.board.dto;
 
+import lombok.AccessLevel;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+
+@Getter
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class CreateArticleRequest {
     private String title;
     private String content;
-
-    protected CreateArticleRequest() {
-
-    }
-
-    public CreateArticleRequest(String title, String content) {
-        this.title = title;
-        this.content = content;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public String getContent() {
-        return content;
-    }
 }

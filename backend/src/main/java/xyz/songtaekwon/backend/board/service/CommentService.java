@@ -1,5 +1,6 @@
 package xyz.songtaekwon.backend.board.service;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import xyz.songtaekwon.backend.board.dto.CreateCommentRequest;
@@ -9,16 +10,12 @@ import xyz.songtaekwon.backend.board.entity.Comment;
 import xyz.songtaekwon.backend.board.repository.ArticleRepository;
 import xyz.songtaekwon.backend.board.repository.CommentRepository;
 
+@RequiredArgsConstructor
 @Service
 public class CommentService {
 
     private final ArticleRepository articleRepository;
     private final CommentRepository commentRepository;
-
-    public CommentService(ArticleRepository articleRepository, CommentRepository commentRepository) {
-        this.articleRepository = articleRepository;
-        this.commentRepository = commentRepository;
-    }
 
     @Transactional
     public void createComment(CreateCommentRequest request) {
@@ -30,7 +27,7 @@ public class CommentService {
     @Transactional
     public void updateComment(Long commentId, UpdateCommentRequest request) {
         Comment comment = commentRepository.findById(commentId).orElseThrow();
-        comment.setContent(request.getContent());
+        comment.changeContent(request.getContent());
         commentRepository.save(comment);
     }
 

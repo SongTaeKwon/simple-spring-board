@@ -5,7 +5,12 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
+import lombok.AccessLevel;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@Getter
 @Entity
 public class Comment {
 
@@ -18,24 +23,12 @@ public class Comment {
 
     private String content;
 
-    protected Comment() {
-
-    }
-
     public Comment(Article article, String content) {
         this.article = article;
         this.content = content;
     }
 
-    public Long getId() {
-        return id;
-    }
-
-    public String getContent() {
-        return content;
-    }
-
-    public void setContent(String content) {
+    public void changeContent(String content) {
         this.content = content;
     }
 }

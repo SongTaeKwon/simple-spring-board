@@ -1,6 +1,7 @@
 package xyz.songtaekwon.backend.board.controller;
 
 import java.util.List;
+import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -15,15 +16,12 @@ import xyz.songtaekwon.backend.board.dto.UpdateArticleRequest;
 import xyz.songtaekwon.backend.board.entity.Article;
 import xyz.songtaekwon.backend.board.service.ArticleService;
 
+@RequiredArgsConstructor
 @RestController
 @RequestMapping("/api/articles")
 public class ArticleController {
 
     private final ArticleService articleService;
-
-    public ArticleController(ArticleService articleService) {
-        this.articleService = articleService;
-    }
 
     @GetMapping
     public List<Article> getAllArticles() {

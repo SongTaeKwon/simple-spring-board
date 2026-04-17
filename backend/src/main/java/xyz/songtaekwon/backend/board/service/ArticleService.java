@@ -1,28 +1,23 @@
 package xyz.songtaekwon.backend.board.service;
 
 import java.util.List;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import xyz.songtaekwon.backend.board.dto.ArticleDetailResponse;
 import xyz.songtaekwon.backend.board.dto.CreateArticleRequest;
-import xyz.songtaekwon.backend.board.dto.CreateCommentRequest;
 import xyz.songtaekwon.backend.board.dto.UpdateArticleRequest;
-import xyz.songtaekwon.backend.board.dto.UpdateCommentRequest;
 import xyz.songtaekwon.backend.board.entity.Article;
 import xyz.songtaekwon.backend.board.entity.Comment;
 import xyz.songtaekwon.backend.board.repository.ArticleRepository;
 import xyz.songtaekwon.backend.board.repository.CommentRepository;
 
+@RequiredArgsConstructor
 @Service
 public class ArticleService {
 
     private final ArticleRepository articleRepository;
     private final CommentRepository commentRepository;
-
-    public ArticleService(ArticleRepository articleRepository, CommentRepository commentRepository) {
-        this.articleRepository = articleRepository;
-        this.commentRepository = commentRepository;
-    }
 
     @Transactional(readOnly = true)
     public List<Article> getAllArticles() {
@@ -45,8 +40,8 @@ public class ArticleService {
     @Transactional
     public void updateArticle(Long id, UpdateArticleRequest request) {
         Article article = articleRepository.findById(id).orElseThrow();
-        article.setTitle(request.getTitle());
-        article.setContent(request.getContent());
+        article.changeTitle(request.getTitle());
+        article.changeContent(request.getContent());
         articleRepository.save(article);
     }
 
